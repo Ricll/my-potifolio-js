@@ -3,10 +3,9 @@ import px2vw from '../../utils/px2vw'
 
 export const Container = styled.div`
   display: collumn;
-
   flex-wrap: wrap;
   margin: ${px2vw(15)};
-  height: ${px2vw(1400)};
+  height: 1400vw;
   max-width: 100%;
   opacity: 0.82;
 
