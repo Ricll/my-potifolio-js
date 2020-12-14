@@ -2,15 +2,17 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-
   align-items: center;
-  margin-left: 1.3%;
-  background-color: #fff;
+  margin-left: 20px;
+  background-color: #ffff;
   width: 100%;
-  height: 7%;
+  height: 50px;
   position: fixed;
   max-width: 100%;
   top: 0;
+  @media only screen and (max-width: 425px) {
+    display: none;
+  }
 `
 
 export const MenuIconsContent = styled.div`
