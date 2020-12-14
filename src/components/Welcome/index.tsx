@@ -1,27 +1,44 @@
-import React from 'react'
-import {
-  useViewportScroll,
-  useTransform,
-  AnimateSharedLayout
-} from 'framer-motion'
+import React, { useState, useEffect } from 'react'
+import { useViewportScroll, useTransform } from 'framer-motion'
+
 import {
   Container,
-  Section,
-  ProfileImg,
+  WelcomeSection,
+  WelcomeContentSection,
+  PortifolioHeader,
+  PortifolioLeftContainer,
+  PortifolioLeftTitle,
+  PortifolioImage,
+  PortifolioRightContainer,
+  PortifolioDescription,
+  PortifolioDescriptionContainer,
   WelcomeTitle,
-  WelcomeTitleContainer,
-  PortifolioText,
-  PortifolioContainer
+  WelcomeTitleContainer
 } from './styles'
 
-import logo from '../../assets/react-logo.png'
+import perfil from '../../assets/perfil.jpg'
 
 const Welcome: React.FC = () => {
   const { scrollYProgress } = useViewportScroll()
-  const ContainerPositiondScale = useTransform(
+
+  const [portifolioOpen, setPortifolioOpen] = useState(false)
+  const [welcomeOpen, setWelcomeOpen] = useState(true)
+
+  useEffect(() => {
+    scrollYProgress.onChange(x => {
+      setTimeout(showPortifolio, 1000)
+
+      function showPortifolio() {
+        setPortifolioOpen(x > 0.002)
+        setWelcomeOpen(x > 0.002)
+      }
+    })
+  }, [setPortifolioOpen, setWelcomeOpen])
+
+  const ContainerPositionScale = useTransform(
     scrollYProgress,
-    [0.0, 0.022, 0.33, 0.05, 0.09],
-    ['fixed', 'fixed', 'fixed', 'fixed', 'absolute']
+    [0.0, 0.002, 0.03, 0.33],
+    ['fixed', 'fixed', 'fixed', 'fixed     ']
   )
 
   const SectionWidhtScale = useTransform(
@@ -33,7 +50,7 @@ const Welcome: React.FC = () => {
   const WelcomeMarginLeftScale = useTransform(
     scrollYProgress,
     [0.0, 0.002],
-    ['100%', '200%']
+    ['101.5%', '50%']
   )
 
   const WelcomeTextTransitionOpacity = useTransform(
@@ -50,34 +67,14 @@ const Welcome: React.FC = () => {
 
   const PortifolioOpacity = useTransform(
     scrollYProgress,
-    [0.0, 0.002, 0.013],
-    ['0', '1', '1']
+    [0.0, 0.0012, 0.0017],
+    ['0', '0.7', '1']
   )
   return (
-    <Container style={{ position: ContainerPositiondScale }}>
-      <Section
-        style={{ width: SectionWidhtScale, transition: 'width 1.3s' }}
-        transition={{ ease: 'easeOut' }}
+    <Container style={{ position: ContainerPositionScale }}>
+      <WelcomeSection
+        style={{ width: SectionWidhtScale, transition: 'width 1.2s' }}
       >
-        <PortifolioContainer
-          style={{ opacity: PortifolioOpacity, transition: '1000ms' }}
-        >
-          <ProfileImg
-            src={logo}
-            alt="profile"
-            animate={{ rotate: 360 }}
-            transition={{ ease: 'linear', duration: 2, loop: Infinity }}
-          />
-          <PortifolioText
-            animate={{ opacity: [1, 0.2, 0.3, 0.4, 0.5, 1] }}
-            transition={{ ease: 'linear', duration: 2, loop: Infinity }}
-          >
-            Olá, <br></br>Meu nome é Ricardo Lopes<br></br>
-            Estou à procura de uma oportunidade como desenvolvedor junior.
-            <br></br>
-            Abaixo você pode ver alguns de meus projetos<br></br> Seta
-          </PortifolioText>
-        </PortifolioContainer>
         <WelcomeTitleContainer
           style={{ marginLeft: WelcomeMarginLeftScale, transition: '1000ms' }}
         >
@@ -115,7 +112,38 @@ const Welcome: React.FC = () => {
             OME
           </WelcomeTitle>
         </WelcomeTitleContainer>
-      </Section>
+      </WelcomeSection>
+
+      {portifolioOpen && (
+        <WelcomeContentSection
+          style={{ opacity: PortifolioOpacity, transition: '1000ms' }}
+          transition={{ ease: 'easeOut' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.1, 0.9, 1] }}
+        >
+          <PortifolioLeftContainer>
+            <PortifolioHeader>
+              <PortifolioImage src={perfil} alt="perfil" />
+              <PortifolioLeftTitle>
+                Ricardo Lopes<br></br> Sao Paulo - SP{' '}
+              </PortifolioLeftTitle>
+            </PortifolioHeader>
+            <PortifolioDescriptionContainer>
+              <PortifolioDescription>
+                {' '}
+                Olá, <br></br>Meu nome é Ricardo Lopes.<br></br>
+                Tenho 45 anos, sou casado e estou à procura de uma oportunidade
+                como desenvolvedor junior (React/React Native).
+                <br></br>
+                Recentemente concluí o bootcamp da Rocketseat e com este
+                aprendizado criei alguns projetos para sua apreciaçao
+              </PortifolioDescription>
+            </PortifolioDescriptionContainer>
+          </PortifolioLeftContainer>
+
+          <PortifolioRightContainer>RIGHT</PortifolioRightContainer>
+        </WelcomeContentSection>
+      )}
     </Container>
   )
 }
