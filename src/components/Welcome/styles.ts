@@ -1,51 +1,135 @@
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import px2vw from '../../utils/px2vw'
-import logo from '../../assets/reactback.png'
 
 export const Container = styled(motion.div)`
-  display: collumn;
-  flex-wrap: wrap;
-  margin-top: ${px2vw(30)};
-  margin-left: ${px2vw(20)};
+  display: flex;
+  position: absolute;
+  z-index: -1;
+  flex-direction: row;
+  margin-top: 35px;
+  margin-left: 20px;
   width: 95%;
   height: 90%;
-  z-index: -1;
+
   background-color: #f1f2f6;
 
-  @media only screen and (max-width: 600px) {
-    height: 100%;
+  @media only screen and (max-width: 425px) {
+    margin-left: 0px;
+
+    margin-top: 0px;
   }
 `
 
-export const Section = styled(motion.div)`
+export const WelcomeSection = styled(motion.div)`
   display: flex;
   position: absolute;
-  z-index: 1;
+  z-index: -1;
   justify-content: center;
   align-items: center;
-  width: ${px2vw(1354)};
+  width: 100%;
   height: 100%;
   background-color: #282c34;
 `
+export const WelcomeContentSection = styled(motion.div)`
+  display: flex;
 
-export const ProfileImg = styled(motion.img)`
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  max-width: 100%;
 
-  @media only screen and (max-width: 425px) {
-    width: 100px;
-    height: 100px;
+  @media (max-width: 800px) {
+    flex-direction: column;
   }
 `
 
+export const PortifolioLeftContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  box-sizing: content-box;
+
+  width: 50%;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+`
+
+export const PortifolioRightContainer = styled(motion.div)`
+  display: flex;
+  box-sizing: content-box;
+  width: 50%;
+  background-color: purple;
+`
+
+export const PortifolioHeader = styled(motion.header)`
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  padding: 10px;
+  border: 2px solid #000;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`
+
+export const PortifolioImage = styled(motion.img)`
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #737782;
+
+  @media (max-width: 800px) {
+    width: 80px;
+    height: 80px;
+  }
+`
+
+export const PortifolioLeftTitle = styled(motion.h1)`
+  text-align: center;
+  text-shadow: 2px 2px #000;
+  font-family: 'Oswald';
+  color: #f1f2f6;
+  font-weight: 600;
+  font-size: 2.3rem;
+  margin-left: 5px;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1.6rem;
+  }
+`
+export const PortifolioDescriptionContainer = styled(motion.div)`
+  display: flex;
+  flex-grow: 25;
+  justify-content: center;
+  padding: 10px;
+
+  background-color: grey;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+  }
+  @media screen and (min-width: 1024px) {
+  }
+`
+
+export const PortifolioDescription = styled(motion.h1)`
+  text-align: center;
+  font-family: 'Oswald';
+  color: #f1f2f6;
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-left: 5px;
+  @media (max-width: 800px) {
+    font-size: 1rem;
+  }
+`
 export const WelcomeTitleContainer = styled(motion.div)`
   display: flex;
-  width: 80%;
-  height: 20%;
-
-  justify-content: center;
+  width: 90%;
+  height: 30%;
   align-items: center;
+  justify-content: center;
 `
 
 export const WelcomeTitle = styled(motion.h1)`
@@ -56,35 +140,6 @@ export const WelcomeTitle = styled(motion.h1)`
   text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0, 0, 0, 0.15);
 
   @media only screen and (max-width: 425px) {
-    font-size: 5rem;
-  }
-`
-export const PortifolioContainer = styled(motion.div)`
-  display: flex;
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  // background: url(${logo});
-  background-position: center;
-  background-color: #282c34;
-
-  box-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0, 0, 0, 0.15);
-`
-
-export const PortifolioTextContainer = styled(motion.div)``
-
-export const PortifolioText = styled(motion.h1)`
-  font-family: 'Oswald';
-  margin-left: 5%;
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-
-  @media only screen and (max-width: 425px) {
-    font-size: 0.9rem;
+    font-size: 4.5rem;
   }
 `
